@@ -18,10 +18,12 @@ class LogIn(object):
             print("User not found \n ")
 
 
-class BankAccount(LogIn):
+class ClientProfile(LogIn):
     def __init__(self, total_income=0):
         self.totalincome = total_income
 
+
+class Transaction(ClientProfile):
     def user_income(self):
         input_income = int(input('Total Income Received: '))
         self.totalincome += input_income
