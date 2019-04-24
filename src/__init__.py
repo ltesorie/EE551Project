@@ -1,4 +1,7 @@
+from money_management
+
 # This Function Stars up the temp non-complicated GUI
+
 def __init__():
     print("~~~Budget App Mobile~~~ \n\t-- Main Menu --")
     user_choice = int(input("""
@@ -11,7 +14,7 @@ def __init__():
     if user_choice == 1:
         print(1)
     elif user_choice == 2:
-        print(2)
+        Bank()
     else:
         exit()
 

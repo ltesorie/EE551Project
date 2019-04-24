@@ -1,5 +1,4 @@
-# from pymongo import MongoClient
-# import urllib.parse
+
 
 
 class LogIn(object):
@@ -32,3 +31,19 @@ class Transaction(ClientProfile):
     def user_expense(self):
         input_expense = int(input('Expense Amount: '))
         self.totalincome -= input_expense
+
+
+# controls the accounts and storage of information
+class Bank(object):
+    def __init__(self):
+        self.username
+        self.password
+        self.balance = filestore.customeraccount()
+
+
+# manages balance of an account
+class BankAccount(object):
+
+
+# in charge of input, output, printing, and calling
+class Interactive(object):
