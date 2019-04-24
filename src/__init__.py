@@ -1,4 +1,4 @@
-from money_management
+import money_management.py
 
 # This Function Stars up the temp non-complicated GUI
 

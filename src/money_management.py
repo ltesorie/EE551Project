@@ -1,6 +1,4 @@
 
-
-
 class LogIn(object):
     def user_name(self, username, password):
         self.username = username
