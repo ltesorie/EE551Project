@@ -15,7 +15,8 @@ def login(userinput, userpassword):
     usernames, passwords, balances = user_files()
     if userinput in usernames:
         password_check(userpassword)
-        user_menu()
+        a = BankActions(userinput, userpassword)
+        a.user_menu()
     else:
         choice = input("""User not found
         Press 1 to Restart
@@ -51,6 +52,9 @@ def user_files():
 
 
 class BankActions(object):
+    def __init__(self, userinput, userpassword):
+        self.username = userinput
+        self.password = userpassword
 
     def expense(self):
         print("$$$")
@@ -61,22 +65,20 @@ class BankActions(object):
     def accountbalance(self):
         print("$$$")
 
+    def user_menu(self):
+        print("""~~~Budget App Mobile~~~ \n\t-- Account Menu Options --""")
+        user_choice = int(input("""
+        1. Log & Check Expense
+        2. Log & Check Income
+        3. Check Account Balance
+        4. Exit 
+        Enter Corresponding Number for Choice: \n"""))
 
-def user_menu():
-    print("~~~Budget App Mobile~~~ \n\t-- Main Menu --")
-    user_choice = int(input("""
-    1. Log & Check Expense
-    2. Log & Check Income
-    3. Check Account Balance
-    4. Exit 
-    Enter Corresponding Number for Choice: """))
-
-    if user_choice == 1:
-        BankActions.expense()
-    elif user_choice == 2:
-        BankActions.income()
-    elif user_choice == 3:
-        BankActions.accountbalance()
-    else:
-        exit()
-
+        if user_choice == 1:
+            self.expense()
+        elif user_choice == 2:
+            self.income()
+        elif user_choice == 3:
+            self.accountbalance()
+        else:
+            exit()
