@@ -14,8 +14,12 @@ time, when implemented into the calendar portion.
 
 Features:
 - Multiple User Platform
-  - Username
-  - Password
+  - New User
+    - Username
+     - Password
+   - Old User 
+    - Username
+    - Password  
 - User Input Track Expenses
 - User Input Track Income
 - Check Account Balance 
