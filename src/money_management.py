@@ -17,7 +17,7 @@ class LogIn(object):
             print("User Account is not available at this time please try again later, Thank you.")
             exit()
         usernames, passwords, balances = self.user_files()
-        if userinput in usernames:
+        if userinput.upper() in usernames:
             password_check(userpassword)
             a = BankActions(userinput, userpassword)
             a.user_menu()
@@ -44,7 +44,7 @@ class LogIn(object):
 
         with open("User_Names.txt", 'r') as usernamefile:
             for line in usernamefile:
-                usernames.append(line[:-1])
+                usernames.append(line[:-1].upper())
         with open("Passwords.txt", 'r') as passfile:
             for line in passfile:
                 passwords.append(line[:-1])
@@ -56,9 +56,9 @@ class LogIn(object):
 
     def new_user(self, desired_username):
         usernames, passwords, balances = self.user_files()
-        if desired_username not in usernames:
+        if desired_username.upper() not in usernames:
             a = open("User_Names.txt", 'a')
-            a.write(desired_username + '\n')
+            a.write(desired_username.upper() + '\n')
             a.close()
         else:
             new_name = input("Username is taken. Please choose something else: \n")
