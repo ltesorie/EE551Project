@@ -3,3 +3,8 @@ US01
 jmac
 Init
 Bob
+lyt
+new
+newusr
+us02
+no

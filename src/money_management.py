@@ -1,3 +1,5 @@
+
+
 # This class log in contains and accesses the information from users and stores it
 # This class also can find or create any user
 class LogIn(object):
@@ -59,7 +61,24 @@ class LogIn(object):
             a.write(desired_username + '\n')
             a.close()
         else:
-            "Username is taken"
+            new_name = input("Username is taken. Please choose something else: \n")
+            self.new_user(new_name)
+        def create_password():
+            new_password = input("Please choose a pin number of at least 4 digits: \n")
+            if len(new_password) < 4:
+                create_password()
+            else:
+                a = open("Passwords.txt", 'a')
+                a.write(new_password + '\n')
+                a.close()
+                passcode = new_password
+                self.existing_user(desired_username, passcode)
+        balance = input("What is your starting account balance? \n")
+        ask = open("Balance.txt", 'a')
+        ask.write(balance + '\n')
+        ask.close()
+        create_password()
+        "User Created: You will be redirected to log in using credentials \n"
 
 
 # This will perform all bank actions for the simulation, providing withdrawal, deposit, and balance information
