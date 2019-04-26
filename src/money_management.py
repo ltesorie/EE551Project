@@ -93,21 +93,9 @@ class BankActions(object):
             data = json.load(outfile)
             for user in data['users']:
                 if self.username.upper() in user['username'].upper():
-                    entry = {
-                        "transaction": [self.transactions, "-" + transaction]
-                    }
-                    with open('json.txt', 'ab+') as f:
-                        f.(user['username'][self.username])
-                        if f.tell() == 0:
-                            f.write(json.dumps([entry]).encode())
-                        else:
-                            f.seek(-2, os.SEEK_END)
-                            f.truncate()
-                            f.write(' , '.encode())
-                            f.write(json.dumps(entry).encode())
-                            f.write(']'.encode())
-                            f.write('}'.encode())
 
+
+        print(data)
 
     def income(self):
         print("$$$")
