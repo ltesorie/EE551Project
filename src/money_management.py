@@ -1,88 +1,82 @@
+import json
+import os
 
 
 # This class log in contains and accesses the information from users and stores it
 # This class also can find or create any user
-class LogIn(object):
-    # this function allows existing users to log in
-    def existing_user(self, userinput, userpassword):
-        def password_check(password):
-            attempts = 3
-            while attempts > 0:
-                if password in passwords:
-                    return True
+class LogInUser(object):
+    def __init__(self):
+        user_input = input("Welcome! Please Enter your Username: \n")
+        with open('json.txt') as outfile:
+            data = json.load(outfile)
+            for user in data['users']:
+                if user_input.upper() == user['username'].upper():
+                    print("found username")
+                    self.username = user['username'].upper()
+                    self.password = user['password']
+                    self.balance = user['balance']
+        self.check_password()
+
+    def check_password(self):
+        user_input = input("Welcome! Please Enter your Pincode: \n")
+        attempts = 3
+        while attempts > 1:
+            if user_input == self.password:
+                startup = BankActions(self.username,self.password)
+                startup.user_menu()
+                return True
+            else:
+                attempts -= 1
+                user_input = input("Incorrect Code." + str(attempts) + " attempts remaining \nplease try again: \n")
+        print("User Account is not available at this time please try again later, Thank you.")
+        exit()
+
+
+class LogInNewUser(object):
+
+    def add_json_obj(self, input_user):
+        with open('json.txt') as outfile:
+            data = json.load(outfile)
+            for user in data['users']:
+                if input_user.upper() != user['username'].upper():
+                    approved_password, balance = self.create_password()
+                    print(approved_password, balance)
+                    self.append_json(input_user, approved_password, balance)
+                    break
                 else:
-                    attempts -= 1
-                    password = input("Incorrect Code." + str(attempts) + " attempts remaining \nplease try again: \n")
+                    print('User Exists')
+                    exit()
+        print("restart and log in with information \n")
+        exit()
 
-            print("User Account is not available at this time please try again later, Thank you.")
-            exit()
-        usernames, passwords, balances = self.user_files()
-        if userinput.upper() in usernames:
-            password_check(userpassword)
-            a = BankActions(userinput, userpassword)
-            a.user_menu()
-        else:
-            choice = input("""User not found
-            Press 1 to Restart
-            Press 2 to Create New User
-            Press 3 to Exit
-            """)
-            if choice == 1:
-                userinput = input("Welcome! Please Enter your Username: \n")
-                userpassword = input("Please enter your 4 digit pin code: \n")
-                self.existing_user(userinput, userpassword)
-            elif choice == 2:
-                print("make new user function")
+    def append_json(self, user, passcode, balance):
+        entry = {
+            "username": user,
+            "password": passcode,
+            "balance": balance
+        }
+        with open('json.txt', 'ab+') as f:
+            f.seek(0, 2)
+            if f.tell() == 0:
+                f.write(json.dumps([entry]).encode())
             else:
-                exit()
+                f.seek(-2, os.SEEK_END)
+                f.truncate()
+                f.write(' , '.encode())
+                f.write(json.dumps(entry).encode())
+                f.write(']'.encode())
+                f.write('}'.encode())
 
-    # This function reads all stored user information and parses the files to store into lists
-    def user_files(self):
-        usernames = []
-        passwords = []
-        balances = []
-
-        with open("User_Names.txt", 'r') as usernamefile:
-            for line in usernamefile:
-                usernames.append(line[:-1].upper())
-        with open("Passwords.txt", 'r') as passfile:
-            for line in passfile:
-                passwords.append(line[:-1])
-        with open("Balance.txt", 'r') as balancefile:
-            for line in balancefile:
-                balances.append(line[:-1])
-
-        return usernames, passwords, balances
-
-    def new_user(self, desired_username):
-        usernames, passwords, balances = self.user_files()
-        if desired_username.upper() not in usernames:
-            a = open("User_Names.txt", 'a')
-            a.write(desired_username.upper() + '\n')
-            a.close()
+    def create_password(self):
+        password = input("Welcome! Please Enter your desired pincode: \n")
+        if len(password) < 4 and password.isdigit() is True:
+            print("Please have at least 4 digits and only numbers")
+            self.create_password()
         else:
-            new_name = input("Username is taken. Please choose something else: \n")
-            self.new_user(new_name)
-        def create_password():
-            new_password = input("Please choose a pin number of at least 4 digits: \n")
-            if len(new_password) < 4:
-                create_password()
-            else:
-                a = open("Passwords.txt", 'a')
-                a.write(new_password + '\n')
-                a.close()
-                passcode = new_password
-                self.existing_user(desired_username, passcode)
-        balance = input("What is your starting account balance? \n")
-        ask = open("Balance.txt", 'a')
-        ask.write(balance + '\n')
-        ask.close()
-        create_password()
-        "User Created: You will be redirected to log in using credentials \n"
+            balance = input("Welcome! Please Enter your starting balance: \n")
+            return password, balance
 
 
-# This will perform all bank actions for the simulation, providing withdrawal, deposit, and balance information
-# Within this class there are multiple functions that are utilized by the program
 class BankActions(object):
     def __init__(self, userinput, userpassword):
         self.username = userinput
