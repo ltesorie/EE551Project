@@ -1,5 +1,6 @@
 import json
 import os
+from six.moves import input
 
 
 # This class log in contains and accesses the information from users and stores it
@@ -22,6 +23,7 @@ class LogInUser(object):
                 elif user_input.upper() not in user['username'].upper():
                     print("...")
         print("Sorry could not locate the username " + user_input + ' please try again or create a new account')
+
     # This function takes in a user's password and checks it against the key on file
     # the user has 3 tries to access their information otherwise it will return to the main menu
     def check_password(self):
