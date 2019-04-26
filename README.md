@@ -3,7 +3,7 @@
 How to Run the Program:
 
 1. Clone or Download the EE551 Project Folder
-2. Run the __init__.py folder through your IDE of choice (I use pycharm)
+2. Run the __ init __ .py file through your IDE of choice (I use pycharm)
 3. Interact with the prompts
 
 
