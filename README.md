@@ -31,6 +31,7 @@ Features:
   - Calculate and Recommend Payment Plans
 - Utilize a database management application ~~ removed due to inability to download software
   - SQL~~ removed due to inability to download software
+-utilize json and parsing through dictionaries for user information
 - Integrate a Calendar Function
   - Schedule Pay Day
   - Schedule Bill Day
