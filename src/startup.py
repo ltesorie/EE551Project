@@ -1,6 +1,6 @@
 # This Function Stars up the GUI for person to interact with
 # This Class is instantiated at the end of the program to start up the function
-from money_management import *
+import money_management
 
 
 class StartUp(object):
