@@ -1,4 +1,11 @@
 // Laura Tesoriero // EE 551 - Project Proposal
+--------------------------------------------------
+How to Run the Program:
+
+1. Clone or Download the EE551 Project Folder
+2. Run the __init__.py folder through your IDE of choice (I use pycharm)
+3. Interact with the prompts
+
 
 Project Pivot:
 
@@ -12,6 +19,8 @@ My new project will be a money management application. This application will kee
 will also be implementting a database platform for the project, utilizing SQL. This application will also send reminders to pay bills on 
 time, when implemented into the calendar portion. 
 
+
+---------------
 Features:
 - Multiple User Platform
   - New User
@@ -48,5 +57,3 @@ To Do:
   - Tracking Loans & Interest
 - Calendar Implementation
 - Add in Unittests
-
-
