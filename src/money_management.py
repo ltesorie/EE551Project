@@ -89,16 +89,45 @@ class BankActions(object):
 
     def expense(self):
         transaction = input("Enter an expense number: \n")
-        with open('json.txt') as outfile:
-            data = json.load(outfile)
-            for user in data['users']:
-                if self.username.upper() in user['username'].upper():
 
-
-        print(data)
+        entry = {
+            "username": self.username,
+            "password": self.password,
+            "balance": self.password,
+            "transaction": [self.balance, '-'+transaction]
+        }
+        with open('json.txt', 'ab+') as f:
+            f.seek(0, 2)
+            if f.tell() == 0:
+                f.write(json.dumps([entry]).encode())
+            else:
+                f.seek(-2, os.SEEK_END)
+                f.truncate()
+                f.write(' , '.encode())
+                f.write(json.dumps(entry).encode())
+                f.write(']'.encode())
+                f.write('}'.encode())
 
     def income(self):
-        print("$$$")
+        transaction = input("Enter an expense number: \n")
+
+        entry = {
+            "username": self.username,
+            "password": self.password,
+            "balance": self.password,
+            "transaction": [self.balance, transaction]
+        }
+        with open('json.txt', 'ab+') as f:
+            f.seek(0, 2)
+            if f.tell() == 0:
+                f.write(json.dumps([entry]).encode())
+            else:
+                f.seek(-2, os.SEEK_END)
+                f.truncate()
+                f.write(' , '.encode())
+                f.write(json.dumps(entry).encode())
+                f.write(']'.encode())
+                f.write('}'.encode())
 
     def account_balance(self):
         response = input("Your current account balance is: \n\t$" + self.balance + "\nWould you like to make another "
@@ -109,7 +138,7 @@ class BankActions(object):
             exit()
 
     def account_transactions(self):
-        response = input("Account Transactions: \n\t$" + self.transactions + "\nWould you like to make another "
+        response = input("Account Transactions: \n\t$" + self.balance + "\nWould you like to make another "
                                                                              "transaction? (y/n): \n")
         if response.upper() == "Y":
             return True
