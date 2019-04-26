@@ -10,12 +10,16 @@ class LogInUser(object):
         with open('json.txt') as outfile:
             data = json.load(outfile)
             for user in data['users']:
-                if user_input.upper() == user['username'].upper():
+                if user_input.upper() in user['username'].upper():
                     print("found username")
                     self.username = user['username'].upper()
                     self.password = user['password']
                     self.balance = user['balance']
-        self.check_password()
+                    self.check_password()
+                elif user_input.upper() not in user['username'].upper():
+                    print("...")
+        print("Sorry could not locate the username " + user_input + ' please try again or create a new account')
+
 
     def check_password(self):
         user_input = input("Welcome! Please Enter your Pincode: \n")
@@ -29,7 +33,6 @@ class LogInUser(object):
                 attempts -= 1
                 user_input = input("Incorrect Code." + str(attempts) + " attempts remaining \nplease try again: \n")
         print("User Account is not available at this time please try again later, Thank you.")
-        exit()
 
 
 class LogInNewUser(object):
@@ -47,7 +50,6 @@ class LogInNewUser(object):
                     print('User Exists')
                     exit()
         print("restart and log in with information \n")
-        exit()
 
     def append_json(self, user, passcode, balance):
         entry = {

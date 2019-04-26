@@ -1,6 +1,6 @@
 # This Function Stars up the GUI for person to interact with
 # This Class is instantiated at the end of the program to start up the function
-from EE551Project.src.money_management import *
+from money_management import *
 
 
 class StartUp(object):
@@ -22,6 +22,7 @@ class StartUp(object):
             exit()
 
 
-if __name__ == "__main__":
-    StartUp()
+while True:
+    if __name__ == "__main__":
+        StartUp()
 
