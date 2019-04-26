@@ -5,6 +5,8 @@ import os
 # This class log in contains and accesses the information from users and stores it
 # This class also can find or create any user
 class LogInUser(object):
+    # this function initializes a registered user and checks their credentials in the system, by comparing to the json
+    # file
     def __init__(self):
         user_input = input("Welcome! Please Enter your Username: \n")
         with open('json.txt') as outfile:
@@ -20,7 +22,8 @@ class LogInUser(object):
                 elif user_input.upper() not in user['username'].upper():
                     print("...")
         print("Sorry could not locate the username " + user_input + ' please try again or create a new account')
-
+    # This function takes in a user's password and checks it against the key on file
+    # the user has 3 tries to access their information otherwise it will return to the main menu
     def check_password(self):
         user_input = input("Welcome! Please Enter your Pincode: \n")
         attempts = 3
@@ -36,7 +39,7 @@ class LogInUser(object):
 
 
 class LogInNewUser(object):
-
+    # this function adds a new user to the system
     def add_json_obj(self, input_user):
         with open('json.txt') as outfile:
             data = json.load(outfile)
@@ -51,6 +54,7 @@ class LogInNewUser(object):
                     exit()
         print("restart and log in with information \n")
 
+    # this function appends the new user information to the json.txt file
     def append_json(self, user, passcode, balance):
         entry = {
             "username": user,
@@ -70,6 +74,8 @@ class LogInNewUser(object):
                 f.write(']'.encode())
                 f.write('}'.encode())
 
+    # this function requires the user to create a password for their account
+    # the password must be 4 or more digits and then they have to start their logging account with a balance
     def create_password(self):
         password = input("Welcome! Please Enter your desired pincode: \n")
         if len(password) < 4 and password.isdigit() is True:
@@ -81,12 +87,14 @@ class LogInNewUser(object):
 
 
 class BankActions(object):
+    # this pulls information from the log in class and stores in to initalize this class
     def __init__(self, userinput, userpassword, userbalance, usertrans):
         self.username = userinput
         self.password = userpassword
         self.balance = userbalance
         self.transactions = usertrans
 
+    # this function is supposed to log the expenses of a user, denoted by a (-) sign
     def expense(self):
         transaction = input("Enter an expense number: \n")
 
@@ -108,6 +116,7 @@ class BankActions(object):
                 f.write(']'.encode())
                 f.write('}'.encode())
 
+    # this function is supposed to log the expenses of a user, denoted by a (+) sign
     def income(self):
         transaction = input("Enter an expense number: \n")
 
@@ -115,7 +124,7 @@ class BankActions(object):
             "username": self.username,
             "password": self.password,
             "balance": self.password,
-            "transaction": [self.balance, transaction]
+            "transaction": [self.balance, '+'+transaction]
         }
         with open('json.txt', 'ab+') as f:
             f.seek(0, 2)
@@ -129,6 +138,7 @@ class BankActions(object):
                 f.write(']'.encode())
                 f.write('}'.encode())
 
+    # this function returns the account balance of the user
     def account_balance(self):
         response = input("Your current account balance is: \n\t$" + self.balance + "\nWould you like to make another "
                                                                                    "transaction? (y/n): \n")
@@ -137,6 +147,7 @@ class BankActions(object):
         else:
             exit()
 
+    # this function returns the list of transactions from the user
     def account_transactions(self):
         response = input("Account Transactions: \n\t$" + self.balance + "\nWould you like to make another "
                                                                              "transaction? (y/n): \n")
