@@ -6,17 +6,20 @@ data_string = '''
     {
         "username": "ltesorie",
         "password": "1108",
-        "balance": "0"
+        "balance": "0",
+        "transactions": "0"
     },
     {
         "username": "jmac",
         "password": "1234",
-        "balance": "10000"
+        "balance": "10000",
+        "transactions": "0"
     },
     {
         "username": "us01",
         "password": "1111",
-        "balance": "100"
+        "balance": "100",
+        "transactions": "0"
     }
 ]
 }

@@ -15,18 +15,18 @@ class LogInUser(object):
                     self.username = user['username'].upper()
                     self.password = user['password']
                     self.balance = user['balance']
+                    self.transactions = user['transactions']
                     self.check_password()
                 elif user_input.upper() not in user['username'].upper():
                     print("...")
         print("Sorry could not locate the username " + user_input + ' please try again or create a new account')
-
 
     def check_password(self):
         user_input = input("Welcome! Please Enter your Pincode: \n")
         attempts = 3
         while attempts > 1:
             if user_input == self.password:
-                startup = BankActions(self.username, self.password, self.balance)
+                startup = BankActions(self.username, self.password, self.balance, self.transactions)
                 startup.user_menu()
                 return True
             else:
@@ -55,7 +55,8 @@ class LogInNewUser(object):
         entry = {
             "username": user,
             "password": passcode,
-            "balance": balance
+            "balance": balance,
+            "transaction": balance
         }
         with open('json.txt', 'ab+') as f:
             f.seek(0, 2)
@@ -80,10 +81,11 @@ class LogInNewUser(object):
 
 
 class BankActions(object):
-    def __init__(self, userinput, userpassword, userbalance):
+    def __init__(self, userinput, userpassword, userbalance, usertrans):
         self.username = userinput
         self.password = userpassword
         self.balance = userbalance
+        self.transactions = usertrans
 
     def expense(self):
         print("$$$")
@@ -91,23 +93,29 @@ class BankActions(object):
     def income(self):
         print("$$$")
 
-    def accountbalance(self):
-        print("Your current account balance is: \n\t$" + self.balance)
-
-    def user_menu(self):
-        print("""~~~Budget App Mobile~~~ \n\t-- Account Menu Options --""")
-        user_choice = int(input("""
-        1. Log & Check Expense
-        2. Log & Check Income
-        3. Check Account Balance
-        4. Exit 
-        Enter Corresponding Number for Choice: \n"""))
-
-        if user_choice == 1:
-            self.expense()
-        elif user_choice == 2:
-            self.income()
-        elif user_choice == 3:
-            self.accountbalance()
+    def account_balance(self):
+        response = input("Your current account balance is: \n\t$" + self.balance + "\nWould you like to make another "
+                                                                                   "transaction? (y/n): \n")
+        if response.upper() == "Y":
+            return True
         else:
             exit()
+
+    def user_menu(self):
+        while True:
+            print("""~~~Budget App Mobile~~~ \n\t-- Account Menu Options --""")
+            user_choice = int(input("""
+            1. Log & Check Expense
+            2. Log & Check Income
+            3. Check Account Balance
+            4. Exit 
+            Enter Corresponding Number for Choice: \n"""))
+
+            if user_choice == 1:
+                self.expense()
+            elif user_choice == 2:
+                self.income()
+            elif user_choice == 3:
+                self.account_balance()
+            else:
+                exit()
