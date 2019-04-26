@@ -1,11 +1,13 @@
 import unittest
-\money_management
-\__init__
+import sys
+import money_management
+from __init__ import *
+
 
 class TestLogInUser(unittest.TestCase):
 
     def test_checkpassword(self):
-        checkpassword = checkpassword()
+        checkpassword = money_management.checkpassword()
         self.assertFalse(checkpassword)
 
 
