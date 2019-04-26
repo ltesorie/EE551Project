@@ -1,8 +1,8 @@
-from money_management import *
-
-
 # This Function Stars up the GUI for person to interact with
 # This Class is instantiated at the end of the program to start up the function
+from EE551Project.src.money_management import *
+
+
 class StartUp(object):
     def __init__(self):
         print("~~~Budget App Mobile~~~ \n\t-- Main Menu --")

@@ -22,7 +22,7 @@ class LogInUser(object):
         attempts = 3
         while attempts > 1:
             if user_input == self.password:
-                startup = BankActions(self.username,self.password)
+                startup = BankActions(self.username, self.password, self.balance)
                 startup.user_menu()
                 return True
             else:
@@ -78,9 +78,10 @@ class LogInNewUser(object):
 
 
 class BankActions(object):
-    def __init__(self, userinput, userpassword):
+    def __init__(self, userinput, userpassword, userbalance):
         self.username = userinput
         self.password = userpassword
+        self.balance = userbalance
 
     def expense(self):
         print("$$$")
@@ -89,7 +90,7 @@ class BankActions(object):
         print("$$$")
 
     def accountbalance(self):
-        print("$$$")
+        print("Your current account balance is: \n\t$" + self.balance)
 
     def user_menu(self):
         print("""~~~Budget App Mobile~~~ \n\t-- Account Menu Options --""")
