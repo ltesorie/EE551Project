@@ -101,6 +101,14 @@ class BankActions(object):
         else:
             exit()
 
+    def account_transactions(self):
+        response = input("Account Transactions: \n\t$" + self.transactions + "\nWould you like to make another "
+                                                                             "transaction? (y/n): \n")
+        if response.upper() == "Y":
+            return True
+        else:
+            exit()
+
     def user_menu(self):
         while True:
             print("""~~~Budget App Mobile~~~ \n\t-- Account Menu Options --""")
@@ -108,7 +116,8 @@ class BankActions(object):
             1. Log & Check Expense
             2. Log & Check Income
             3. Check Account Balance
-            4. Exit 
+            4. List Account Transactions
+            5. Exit 
             Enter Corresponding Number for Choice: \n"""))
 
             if user_choice == 1:
@@ -117,5 +126,7 @@ class BankActions(object):
                 self.income()
             elif user_choice == 3:
                 self.account_balance()
+            elif user_choice == 4:
+                self.account_transactions()
             else:
                 exit()
